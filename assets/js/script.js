@@ -41,12 +41,26 @@ const renderForecast = function () {
 };
 
 const handleClick = function (event) {
-  console.log("click");
+  event.preventDefault();
   //   get value from search input
   const searchBox = $("#city-input");
   const city = searchBox.val();
   console.log(city);
-};
+  // validate value
+  if (errorDiv.length){
+    $("#errorDiv").remove();
+  }
+  else if (!city || !errorDiv) {
+      const errorDiv = `<p id="errorDiv">please enter a city</p>`;
+    $("#search-form").append(errorDiv);
+  } else {
+      $("#errorDiv").remove();
+  }
+
+  //   fetch current data for city
+
+  //  fetch forecast for city
+};;
 
 const onLoad = function () {
   //   render search history

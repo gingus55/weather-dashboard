@@ -24,9 +24,9 @@ const renderSearchHistory = function () {
 
 const constructTodaysWeather = function (data) {
   // console.log(data.weather[0].icon);
-
+    const date = moment($(data.dt)).format("DD-MM-YYYY");
   return `<div>
-    <h2>${data.name} AND ${data.dt}
+    <h2>${data.name} : ${date}
         <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">
     </h2>
 
@@ -85,7 +85,6 @@ const handleClick = function (event) {
     // handle data
     
     const handleData = function (data) {
-      //   console.log(data);
     //   validate data
     if(data.cod==200){
        //   render todays weather
@@ -93,7 +92,6 @@ const handleClick = function (event) {
       // render forecast
       renderForecast(data);
     } else {
-      
       const error = document.createElement("p");
       error.textContent = "please enter a valid city";
       $("#error-response").append(error);

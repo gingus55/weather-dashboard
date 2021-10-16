@@ -24,6 +24,7 @@ const renderSearchHistory = function () {
 
 const constructTodaysWeather = function (data) {
   // console.log(data.weather[0].icon);
+
   return `<div>
     <h2>${data.name} AND ${data.dt}
         <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">

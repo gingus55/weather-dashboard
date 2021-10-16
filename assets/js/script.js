@@ -57,6 +57,11 @@ const renderForecast = function () {
   constructForecast();
 };
 
+const getFromLocalStorage = function(){
+    const searchHistory = JSON.parse(localStorage.getItem("history")) || [];
+    return searchHistory;
+}
+
 const handleClick = function (event) {
   event.preventDefault();
   $("#error-response").empty();
@@ -74,11 +79,12 @@ const handleClick = function (event) {
     const myUrl =
       `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=` +
       myAPIKey;
-    // console.log(myUrl);
+    
+    // render search history
 
     // handle response
+
     const handleResponse = function (response) {
-    //   console.log(response.json());
         return response.json();
       
     };
@@ -87,6 +93,12 @@ const handleClick = function (event) {
     const handleData = function (data) {
     //   validate data
     if(data.cod==200){
+        // save city into local storage
+    const searched = getFromLocalStorage();
+    searched.push(data.name);
+    localStorage.setItem("history", JSON.stringify(searched));
+    // render search history
+    
        //   render todays weather
       renderTodaysWeather(data);
       // render forecast
@@ -108,6 +120,7 @@ const handleClick = function (event) {
 };
 
 const onLoad = function () {
+    // get data from local storage
   //   //   render search history
   //   renderSearchHistory();
   //   // render top search history details

@@ -6,9 +6,9 @@
 }
 
 .title{
-    margin-left: 50px;
+    text-align: center;
     border: none;
-    padding: 10px 50px;
+    padding: 50px 10px;
 }
 
 .main-container{
@@ -32,8 +32,40 @@ ul{
     list-style: none;
 }
 
+#search-btn{
+    margin: 5px 5px;
+    padding: 2px 5px;
+    width:100%;
+}
+
+.custom{
+    padding:5px 5px;
+}
+
+.padstyle{
+    margin-right: 5px;
+    margin-bottom: 5px;
+    background: rgb(186, 204, 238);
+}
+
+.current-weather{
+    background-color: rgb(236, 232, 232);
+}
+
 .forecast-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px){
+    .page-main{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .aside{
+        border-right:none;
+    }
+
 }

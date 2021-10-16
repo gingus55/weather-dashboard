@@ -2,11 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 }
 
 .title{
-    margin-left: 18rem;
+    margin-left: 50px;
     border: none;
     padding: 10px 50px;
 }
@@ -14,6 +14,18 @@
 .main-container{
     display: flex;
     flex-direction: row;
+}
+
+.aside{
+    border-right: black solid 3px;
+}
+
+#city-input{
+    margin: 5px;
+}
+
+#submit{
+    margin-left: 15px;
 }
 
 ul{

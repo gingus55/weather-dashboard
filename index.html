@@ -16,20 +16,31 @@
     <header><h1 class="title">Weather Dashboard</h1></header>
     <main class="row">
     <aside class="aside col-3">
-        <form>CITY SEARCH
+        <form><h4 id="submit">CITY SEARCH</h4>
             <input type="text" id="city-input" placeholder="Enter City Name"> 
+            <button class="btn btn-secondary" id="submit">SEARCH</button>
         </form>
         <div>
         </div>
         <ul id="search-history">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
+            <li>LONDON</li>
+            <li>NEW YORK</li>
+            <li>ALABAMA</li>
+            <li>BIRMINGHAM</li>
         </ul>
     </aside>
     <section class="container col-9">
-        <div class="row current-weather">CURRENT DAY</div>
+        <div class="row current-weather">
+            <h2>TODAY CITY AND DATE
+                <img src="#">
+            </h2>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temperature</li>
+                <li class="list-group-item">Humidity</li>
+                <li class="list-group-item">UV</li>
+              </ul>
+        </div>
 
         <div class="row forecast-container">
             <div class="card col-2" style="width: 18rem;">

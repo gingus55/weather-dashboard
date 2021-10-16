@@ -1,4 +1,5 @@
 console.log("howdy planet");
+const myAPIKey = "f23ee9deb4e1a7450f3157c44ed020e1";
 
 const getHistoryFromLS = function () {
   console.log("retrieved history");
@@ -27,6 +28,7 @@ const constructTodaysWeather = function () {
 const renderTodaysWeather = function () {
   console.log("todays weather rendered");
   //   construct todays weather and append
+  $("#current-weather").empty();
   constructTodaysWeather();
 };
 
@@ -42,19 +44,39 @@ const renderForecast = function () {
 
 const handleClick = function (event) {
   event.preventDefault();
+  $("#error-response").empty();
   //   get value from search input
   const searchBox = $("#city-input");
   const city = searchBox.val();
   console.log(city);
   // validate value
-  if (errorDiv.length){
-    $("#errorDiv").remove();
-  }
-  else if (!city || !errorDiv) {
-      const errorDiv = `<p id="errorDiv">please enter a city</p>`;
-    $("#search-form").append(errorDiv);
+  if (!city) {
+    const error = document.createElement("p");
+    error.textContent = "please enter a valid city";
+    $("#error-response").append(error);
   } else {
-      $("#errorDiv").remove();
+    //   create Url
+    const myUrl =
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=` +
+      myAPIKey;
+    console.log(myUrl);
+
+    // handle response
+    const handleResponse = function (response) {
+      return response.json();
+    };
+    // handle data
+
+    const handleData = function (data) {
+      console.log(data);
+      //   render todays weather
+      renderTodaysWeather(data);
+      // render forecast
+      renderForecast(data);
+    };
+    // make fetch request
+
+    fetch(myUrl).then(handleResponse).then(handleData);
   }
 
   //   fetch current data for city

@@ -38,6 +38,10 @@ ul{
     width:100%;
 }
 
+#error-response{
+    color: crimson;
+}
+
 .custom{
     padding:5px 5px;
 }

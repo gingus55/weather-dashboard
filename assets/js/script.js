@@ -78,16 +78,26 @@ const handleClick = function (event) {
 
     // handle response
     const handleResponse = function (response) {
-      return response.json();
+    //   console.log(response.json());
+        return response.json();
+      
     };
     // handle data
-
+    
     const handleData = function (data) {
       //   console.log(data);
-      //   render todays weather
+    //   validate data
+    if(data.cod==200){
+       //   render todays weather
       renderTodaysWeather(data);
       // render forecast
       renderForecast(data);
+    } else {
+      
+      const error = document.createElement("p");
+      error.textContent = "please enter a valid city";
+      $("#error-response").append(error);
+    };
     };
     // make fetch request
 

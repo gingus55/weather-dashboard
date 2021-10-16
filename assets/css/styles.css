@@ -70,6 +70,10 @@ ul{
 
     .aside{
         border-right:none;
+        width:100%;
     }
 
+    .col-3{
+        width:80%;
+    }
 }

@@ -2,11 +2,6 @@ console.log("howdy planet");
 const myAPIKey = "f23ee9deb4e1a7450f3157c44ed020e1";
 const currentWeather = $("#current-weather");
 
-const getHistoryFromLS = function () {
-  console.log("retrieved history");
-  //   pull from LS
-};
-
 const constructSearchHistory = function () {
   console.log("history constructed");
   //   construct history buttons
@@ -17,7 +12,7 @@ const constructSearchHistory = function () {
 const renderSearchHistory = function () {
   console.log("history rendered");
   //   get history data from LS
-  getHistoryFromLS();
+  const array = getFromLocalStorage();
   //construct history button and append to search history
   constructSearchHistory();
 };
@@ -98,7 +93,7 @@ const handleClick = function (event) {
     searched.push(data.name);
     localStorage.setItem("history", JSON.stringify(searched));
     // render search history
-    
+
        //   render todays weather
       renderTodaysWeather(data);
       // render forecast

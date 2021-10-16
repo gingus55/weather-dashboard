@@ -13,10 +13,12 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <header>Weather Dashboard</header>
+    <header><h1 class="title">Weather Dashboard</h1></header>
     <main class="row">
     <aside class="aside col-3">
-        <form>MY SEARCH</form>
+        <form>CITY SEARCH
+            <input type="text" id="city-input" placeholder="Enter City Name"> 
+        </form>
         <div>
         </div>
         <ul id="search-history">
@@ -27,8 +29,60 @@
         </ul>
     </aside>
     <section class="container col-9">
-        <div class="row">hello</div>
-        <div class="row">world</div>
+        <div class="row current-weather">CURRENT DAY</div>
+
+        <div class="row forecast-container">
+            <div class="card col-2" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Date<img src="..." class="card-img-top" alt="..."></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Temperature</li>
+                  <li class="list-group-item">Humidity</li>
+                  <li class="list-group-item">UV</li>
+                </ul>
+            </div>
+            <div class="card col-2" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">DAte<img src="..." class="card-img-top" alt="..."></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Temperature</li>
+                  <li class="list-group-item">Humidity</li>
+                  <li class="list-group-item">UV</li>
+                </ul>
+            </div>
+            <div class="card col-2" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">DAte<img src="..." class="card-img-top" alt="..."></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Temperature</li>
+                  <li class="list-group-item">Humidity</li>
+                  <li class="list-group-item">UV</li>
+                </ul>
+            </div>
+            <div class="card col-2" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">DAte<img src="..." class="card-img-top" alt="..."></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Temperature</li>
+                  <li class="list-group-item">Humidity</li>
+                  <li class="list-group-item">UV</li>
+                </ul>
+            </div>
+            <div class="card col-2" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">DAte<img src="..." class="card-img-top" alt="..."></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Temperature</li>
+                  <li class="list-group-item">Humidity</li>
+                  <li class="list-group-item">UV</li>
+                </ul>
+            </div>
+        </div>        
     </section>
 </main>
 

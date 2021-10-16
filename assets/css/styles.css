@@ -5,7 +5,23 @@
     border: solid black 1px;
 }
 
+.title{
+    margin-left: 18rem;
+    border: none;
+    padding: 10px 50px;
+}
+
 .main-container{
     display: flex;
     flex-direction: row;
+}
+
+ul{
+    list-style: none;
+}
+
+.forecast-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

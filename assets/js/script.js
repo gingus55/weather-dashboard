@@ -90,6 +90,11 @@ const handleClick = function (event) {
         renderTodaysWeather(data);
         // render forecast
         renderForecast(data);
+
+        // get data for forecast fetch
+
+        const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lon}&lon=${data.coord.lon}&exclude={part}&appid=${myAPIKey}`;
+        console.log(forecastURL);
       } else {
         const error = document.createElement("p");
         error.textContent = "please enter a valid city";

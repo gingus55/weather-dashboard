@@ -21,7 +21,8 @@ const renderSearchHistory = function () {
 };
 
 const constructTodaysWeather = function (data) {
-  const date = moment($(data.dt)).format("DD-MM-YYYY");
+  const date = moment.unix(data.dt).format("DD-MM-YYYY");
+  console.log(data.dt);
   return `<div>
     <h2>${data.name} : ${date}
         <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">
@@ -42,14 +43,12 @@ const renderTodaysWeather = function (data) {
 };
 
 const constructForecast = function (dailyArray) {
-    console.log(dailyArray);
+  console.log(dailyArray);
   dailyArray.forEach((element) => {
-      var date = moment($(element.dt)).format("DD-MM-YYYY");
+    const date = moment.unix(element.dt).format("DD-MM-YYYY");
     forecastBlock = `<div class="card col-2 padstyle" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">${date}<img src="http://openweathermap.org/img/wn/${
-      element.weather[0].icon
-    }.png" alt="..."></h5>
+      <h5 class="card-title">${date}<img src="http://openweathermap.org/img/wn/${element.weather[0].icon}.png" alt="..."></h5>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Temperature: ${element.temp.day} <sup>O</sup>C</li>
@@ -108,16 +107,18 @@ const handleClick = function (event) {
 
         // get data for forecast fetch
 
-        const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lon}&lon=${data.coord.lon}&exclude={part}&units=metric&appid=${myAPIKey}`;
+        const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude={part}&units=metric&appid=${myAPIKey}`;
 
         const handleSecondResponse = function (response) {
           return response.json();
         };
-        // THIS IS WHERE I@M AT
+
         const handleSecondData = function (data) {
           const dailyArray = data.daily;
-          dailyArray.splice(5, 3);
-          renderForecast(dailyArray);
+
+          const dailyArr = dailyArray.slice(1, 6);
+
+          renderForecast(dailyArr);
         };
 
         fetch(forecastURL).then(handleSecondResponse).then(handleSecondData);

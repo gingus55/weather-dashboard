@@ -22,7 +22,7 @@ const renderSearchHistory = function () {
 
 const constructTodaysWeather = function (data) {
   const date = moment.unix(data.dt).format("DD-MM-YYYY");
-  console.log(data.dt);
+
   return `<div>
     <h2>${data.name} : ${date}
         <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">
@@ -31,7 +31,7 @@ const constructTodaysWeather = function (data) {
         <li class="custom">Temperature: ${data.main.temp} <sup>O</sup>C</li>
         <li class="custom">Humidity: ${data.main.humidity} %</li>
         <li class="custom">Wind Speed: ${data.wind.speed} m/s</li>
-        <li class="custom">UV</li>
+        <li class="custom" >UV<span id="uvi"></span></li>
       </ul>
   </div>`;
 };
@@ -43,7 +43,6 @@ const renderTodaysWeather = function (data) {
 };
 
 const constructForecast = function (dailyArray) {
-  console.log(dailyArray);
   dailyArray.forEach((element) => {
     const date = moment.unix(element.dt).format("DD-MM-YYYY");
     forecastBlock = `<div class="card col-2 padstyle" style="width: 18rem;">
@@ -71,6 +70,10 @@ const getFromLocalStorage = function () {
   return searchHistory;
 };
 
+const handleResponse = function (response) {
+  return response.json();
+};
+
 const handleClick = function (event) {
   event.preventDefault();
   $("#error-response").empty();
@@ -86,10 +89,6 @@ const handleClick = function (event) {
     const myUrl =
       `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=` +
       myAPIKey;
-
-    const handleResponse = function (response) {
-      return response.json();
-    };
 
     const handleData = function (data) {
       //   validate data
@@ -109,10 +108,6 @@ const handleClick = function (event) {
 
         const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude={part}&units=metric&appid=${myAPIKey}`;
 
-        const handleSecondResponse = function (response) {
-          return response.json();
-        };
-
         const handleSecondData = function (data) {
           const dailyArray = data.daily;
 
@@ -121,7 +116,7 @@ const handleClick = function (event) {
           renderForecast(dailyArr);
         };
 
-        fetch(forecastURL).then(handleSecondResponse).then(handleSecondData);
+        fetch(forecastURL).then(handleResponse).then(handleSecondData);
       } else {
         const error = document.createElement("p");
         error.textContent = "please enter a valid city";
@@ -143,8 +138,10 @@ const onLoad = function () {
   var historyOnLoad = getFromLocalStorage();
   //   //   render search history
   renderSearchHistory(historyOnLoad);
-  //   renderTodaysWeather();
-  //   renderForecast();
+
+  console.log(historyOnLoad);
+  // renderTodaysWeather(historyOnLoad[0]);
+  // renderForecast(historyOnLoad[0]);
 
   $("#submit").on("click", handleClick);
 };

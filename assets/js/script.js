@@ -27,9 +27,9 @@ const constructTodaysWeather = function (data) {
         <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">
     </h2>
     <ul class="list-group-flush">
-        <li class="custom">Temperature: ${data.main.temp}</li>
+        <li class="custom">Temperature: ${data.main.temp} <sup>O</sup>C</li>
         <li class="custom">Humidity: ${data.main.humidity}</li>
-        <li class="custom">Wind Speed: ${data.wind.speed}</li>
+        <li class="custom">Wind Speed: ${data.wind.speed} m/s</li>
         <li class="custom">UV</li>
       </ul>
   </div>`;
@@ -42,19 +42,19 @@ const renderTodaysWeather = function (data) {
 };
 
 const constructForecast = function (dailyArray) {
+    console.log(dailyArray);
   dailyArray.forEach((element) => {
+      var date = moment($(element.dt)).format("DD-MM-YYYY");
     forecastBlock = `<div class="card col-2 padstyle" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">${moment(element.dt).format(
-        "DD-MM-YYYY"
-      )}<img src="http://openweathermap.org/img/wn/${
+      <h5 class="card-title">${date}<img src="http://openweathermap.org/img/wn/${
       element.weather[0].icon
-    }.png" class="card-img-top" alt="..."></h5>
+    }.png" alt="..."></h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Temperature: ${element.temp.day}</li>
+      <li class="list-group-item">Temperature: ${element.temp.day} <sup>O</sup>C</li>
       <li class="list-group-item">Humidity: ${element.humidity}</li>
-      <li class="list-group-item">Wind speed: ${element.wind_speed}</li>
+      <li class="list-group-item">Wind speed: ${element.wind_speed} m/s</li>
     </ul>
 </div>`;
     forecastContainer.append(forecastBlock);
@@ -85,7 +85,7 @@ const handleClick = function (event) {
     $("#error-response").append(error);
   } else {
     const myUrl =
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=` +
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=` +
       myAPIKey;
 
     const handleResponse = function (response) {
@@ -108,7 +108,7 @@ const handleClick = function (event) {
 
         // get data for forecast fetch
 
-        const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lon}&lon=${data.coord.lon}&exclude={part}&appid=${myAPIKey}`;
+        const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lon}&lon=${data.coord.lon}&exclude={part}&units=metric&appid=${myAPIKey}`;
 
         const handleSecondResponse = function (response) {
           return response.json();
@@ -141,8 +141,6 @@ const onLoad = function () {
   var historyOnLoad = getFromLocalStorage();
   //   //   render search history
   renderSearchHistory(historyOnLoad);
-  //   renderSearchHistory();
-  //   // render top search history details
   //   renderTodaysWeather();
   //   renderForecast();
 

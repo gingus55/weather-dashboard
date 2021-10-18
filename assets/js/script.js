@@ -28,7 +28,7 @@ const constructTodaysWeather = function (data) {
     </h2>
     <ul class="list-group-flush">
         <li class="custom">Temperature: ${data.main.temp} <sup>O</sup>C</li>
-        <li class="custom">Humidity: ${data.main.humidity}</li>
+        <li class="custom">Humidity: ${data.main.humidity} %</li>
         <li class="custom">Wind Speed: ${data.wind.speed} m/s</li>
         <li class="custom">UV</li>
       </ul>
@@ -53,7 +53,7 @@ const constructForecast = function (dailyArray) {
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Temperature: ${element.temp.day} <sup>O</sup>C</li>
-      <li class="list-group-item">Humidity: ${element.humidity}</li>
+      <li class="list-group-item">Humidity: ${element.humidity} %</li>
       <li class="list-group-item">Wind speed: ${element.wind_speed} m/s</li>
     </ul>
 </div>`;
@@ -116,6 +116,7 @@ const handleClick = function (event) {
         // THIS IS WHERE I@M AT
         const handleSecondData = function (data) {
           const dailyArray = data.daily;
+          dailyArray.splice(5, 3);
           renderForecast(dailyArray);
         };
 

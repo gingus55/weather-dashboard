@@ -1,4 +1,3 @@
-console.log("howdy planet");
 const myAPIKey = "f23ee9deb4e1a7450f3157c44ed020e1";
 const currentWeather = $("#current-weather");
 const searchContainer = $("#search-history");
@@ -31,7 +30,7 @@ const constructTodaysWeather = function (data) {
         <li class="custom">Temperature: ${data.main.temp} <sup>O</sup>C</li>
         <li class="custom">Humidity: ${data.main.humidity} %</li>
         <li class="custom">Wind Speed: ${data.wind.speed} m/s</li>
-        <li class="custom" >UV<span id="uvi"></span></li>
+        <li class="custom" >UV Index: <span id="uvi"></span></li>
       </ul>
   </div>`;
 };
@@ -80,6 +79,18 @@ const showError = function () {
   $("#error-response").append(error);
 };
 
+const renderUviSpan = function (uviData) {
+  const placeHolder = $("#uvi");
+  placeHolder.text(uviData);
+  if (uviData < 3) {
+    placeHolder.addClass("green");
+  } else if (uviData >= 3 && uviData < 8) {
+    placeHolder.addClass("orange");
+  } else {
+    placeHolder.addClass("red");
+  }
+};
+
 const renderPage = function (city) {
   const myUrl =
     `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=` +
@@ -104,11 +115,15 @@ const renderPage = function (city) {
       const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude={part}&units=metric&appid=${myAPIKey}`;
 
       const handleSecondData = function (data) {
+        const uviData = data.current.uvi;
+
         const dailyArray = data.daily;
 
         const dailyArr = dailyArray.slice(1, 6);
 
         renderForecast(dailyArr);
+
+        renderUviSpan(uviData);
       };
 
       fetch(forecastURL).then(handleResponse).then(handleSecondData);
@@ -155,6 +170,4 @@ const handlePastClick = function (event) {
   }
 };
 
-
 window.addEventListener("load", onLoad);
-

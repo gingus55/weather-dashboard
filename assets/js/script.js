@@ -13,9 +13,7 @@ const constructSearchHistory = function (array) {
 
 const renderSearchHistory = function () {
   searchContainer.empty();
-  //   get history data from LS
   const array = getFromLocalStorage();
-  //construct history button and append to search history
   constructSearchHistory(array);
 };
 
@@ -60,7 +58,6 @@ const constructForecast = function (dailyArray) {
 
 const renderForecast = function (dailyArray) {
   forecastContainer.empty();
-  //   construct and append forecast
   constructForecast(dailyArray);
 };
 
@@ -97,17 +94,17 @@ const renderPage = function (city) {
     myAPIKey;
 
   const handleData = function (data) {
-    //   validate data
+    
     if (data.cod == 200) {
-      // save city into local storage
+    //   save city into local storage
       const searched = getFromLocalStorage();
       if (!searched.includes(data.name)) {
         searched.push(data.name);
         localStorage.setItem("history", JSON.stringify(searched));
       }
-      // render search history
+      
       renderSearchHistory();
-      //   render todays weather
+      
       renderTodaysWeather(data);
 
       // get data for forecast fetch
@@ -116,13 +113,10 @@ const renderPage = function (city) {
 
       const handleSecondData = function (data) {
         const uviData = data.current.uvi;
-
         const dailyArray = data.daily;
-
         const dailyArr = dailyArray.slice(1, 6);
 
         renderForecast(dailyArr);
-
         renderUviSpan(uviData);
       };
 
@@ -131,7 +125,6 @@ const renderPage = function (city) {
       showError();
     }
   };
-  // make fetch request
 
   fetch(myUrl).then(handleResponse).then(handleData);
 };
@@ -139,10 +132,10 @@ const renderPage = function (city) {
 const handleClick = function (event) {
   event.preventDefault();
   $("#error-response").empty();
-  //   get value from search input
+  
   const searchBox = $("#city-input");
   const city = searchBox.val();
-  // validate value
+  
   if (!city) {
     showError();
   } else {
@@ -151,9 +144,9 @@ const handleClick = function (event) {
 };
 
 const onLoad = function () {
-  // get data from local storage
+
   var historyOnLoad = getFromLocalStorage();
-  //   //   render search history
+
   renderSearchHistory(historyOnLoad);
 
   renderPage(historyOnLoad[0]);

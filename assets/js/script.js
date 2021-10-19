@@ -74,6 +74,53 @@ const handleResponse = function (response) {
   return response.json();
 };
 
+const showError = function () {
+  const error = document.createElement("p");
+  error.textContent = "please enter a valid city";
+  $("#error-response").append(error);
+};
+
+const renderPage = function (city) {
+  const myUrl =
+    `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=` +
+    myAPIKey;
+
+  const handleData = function (data) {
+    //   validate data
+    if (data.cod == 200) {
+      // save city into local storage
+      const searched = getFromLocalStorage();
+      if (!searched.includes(data.name)) {
+        searched.push(data.name);
+        localStorage.setItem("history", JSON.stringify(searched));
+      }
+      // render search history
+      renderSearchHistory();
+      //   render todays weather
+      renderTodaysWeather(data);
+
+      // get data for forecast fetch
+
+      const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude={part}&units=metric&appid=${myAPIKey}`;
+
+      const handleSecondData = function (data) {
+        const dailyArray = data.daily;
+
+        const dailyArr = dailyArray.slice(1, 6);
+
+        renderForecast(dailyArr);
+      };
+
+      fetch(forecastURL).then(handleResponse).then(handleSecondData);
+    } else {
+      showError();
+    }
+  };
+  // make fetch request
+
+  fetch(myUrl).then(handleResponse).then(handleData);
+};
+
 const handleClick = function (event) {
   event.preventDefault();
   $("#error-response").empty();
@@ -82,55 +129,10 @@ const handleClick = function (event) {
   const city = searchBox.val();
   // validate value
   if (!city) {
-    const error = document.createElement("p");
-    error.textContent = "please enter a valid city";
-    $("#error-response").append(error);
+    showError();
   } else {
-    const myUrl =
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=` +
-      myAPIKey;
-
-    const handleData = function (data) {
-      //   validate data
-      if (data.cod == 200) {
-        // save city into local storage
-        const searched = getFromLocalStorage();
-        if (!searched.includes(data.name)) {
-          searched.push(data.name);
-          localStorage.setItem("history", JSON.stringify(searched));
-        }
-        // render search history
-        renderSearchHistory();
-        //   render todays weather
-        renderTodaysWeather(data);
-
-        // get data for forecast fetch
-
-        const forecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude={part}&units=metric&appid=${myAPIKey}`;
-
-        const handleSecondData = function (data) {
-          const dailyArray = data.daily;
-
-          const dailyArr = dailyArray.slice(1, 6);
-
-          renderForecast(dailyArr);
-        };
-
-        fetch(forecastURL).then(handleResponse).then(handleSecondData);
-      } else {
-        const error = document.createElement("p");
-        error.textContent = "please enter a valid city";
-        $("#error-response").append(error);
-      }
-    };
-    // make fetch request
-
-    fetch(myUrl).then(handleResponse).then(handleData);
+    renderPage(city);
   }
-
-  //   fetch current data for city
-
-  //  fetch forecast for city
 };
 
 const onLoad = function () {
@@ -139,12 +141,20 @@ const onLoad = function () {
   //   //   render search history
   renderSearchHistory(historyOnLoad);
 
-  console.log(historyOnLoad);
-  // renderTodaysWeather(historyOnLoad[0]);
-  // renderForecast(historyOnLoad[0]);
+  renderPage(historyOnLoad[0]);
 
   $("#submit").on("click", handleClick);
+  searchContainer.on("click", handlePastClick);
 };
+
+const handlePastClick = function (event) {
+  const target = event.target;
+  if (target.getAttribute("id") === "search-btn") {
+    const city = target.textContent;
+    renderPage(city);
+  }
+};
+
 
 window.addEventListener("load", onLoad);
 

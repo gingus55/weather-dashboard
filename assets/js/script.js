@@ -90,7 +90,7 @@ const renderUviSpan = function (uviData) {
 
 const renderPage = function (city) {
   const myUrl =
-    `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=` +
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=` +
     myAPIKey;
 
   const handleData = function (data) {

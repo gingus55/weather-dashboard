@@ -94,17 +94,16 @@ const renderPage = function (city) {
     myAPIKey;
 
   const handleData = function (data) {
-    
     if (data.cod == 200) {
-    //   save city into local storage
+      //   save city into local storage
       const searched = getFromLocalStorage();
       if (!searched.includes(data.name)) {
         searched.push(data.name);
         localStorage.setItem("history", JSON.stringify(searched));
       }
-      
+
       renderSearchHistory();
-      
+
       renderTodaysWeather(data);
 
       // get data for forecast fetch
@@ -121,8 +120,6 @@ const renderPage = function (city) {
       };
 
       fetch(forecastURL).then(handleResponse).then(handleSecondData);
-    } else {
-      showError();
     }
   };
 
@@ -132,10 +129,10 @@ const renderPage = function (city) {
 const handleClick = function (event) {
   event.preventDefault();
   $("#error-response").empty();
-  
+
   const searchBox = $("#city-input");
   const city = searchBox.val();
-  
+
   if (!city) {
     showError();
   } else {
@@ -144,12 +141,11 @@ const handleClick = function (event) {
 };
 
 const onLoad = function () {
-
   var historyOnLoad = getFromLocalStorage();
 
   renderSearchHistory(historyOnLoad);
 
-  renderPage(historyOnLoad[0]);
+  renderPage(historyOnLoad[historyOnLoad.length - 1]);
 
   $("#submit").on("click", handleClick);
   searchContainer.on("click", handlePastClick);

@@ -120,6 +120,8 @@ const renderPage = function (city) {
       };
 
       fetch(forecastURL).then(handleResponse).then(handleSecondData);
+    } else {
+      showError();
     }
   };
 
@@ -141,12 +143,12 @@ const handleClick = function (event) {
 };
 
 const onLoad = function () {
-  var historyOnLoad = getFromLocalStorage();
+  const historyOnLoad = getFromLocalStorage();
+  if (!historyOnLoad.length === 0) {
+    renderSearchHistory(historyOnLoad);
 
-  renderSearchHistory(historyOnLoad);
-
-  renderPage(historyOnLoad[historyOnLoad.length - 1]);
-
+    renderPage(historyOnLoad[historyOnLoad.length - 1]);
+  }
   $("#submit").on("click", handleClick);
   searchContainer.on("click", handlePastClick);
 };

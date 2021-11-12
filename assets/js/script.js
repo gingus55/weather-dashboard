@@ -41,7 +41,7 @@ const renderTodaysWeather = function (data) {
 
 const constructForecast = function (dailyArray) {
   dailyArray.forEach((element) => {
-    const date = moment.unix(element.dt).format("DD-MM-YYYY");
+    const date = moment.unix(element.dt).format("dddd-MM-YYYY");
     forecastBlock = `<div class="card col-2 padstyle" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">${date}<img src="http://openweathermap.org/img/wn/${element.weather[0].icon}.png" alt="..."></h5>

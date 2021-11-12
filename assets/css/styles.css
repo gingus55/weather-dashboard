@@ -1,95 +1,95 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* border: solid black 1px; */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
 }
 
-.title{
-    text-align: center;
-    border: none;
-    padding: 50px 10px;
+.title {
+  text-align: center;
+  border: none;
+  padding: 50px 10px;
 }
 
-.main-container{
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.aside {
+  padding-left: 30px;
+  border-right: black solid 3px;
+}
+
+#city-input {
+  margin: 5px;
+}
+
+.submit {
+  margin-left: 15px;
+}
+
+ul {
+  list-style: none;
+}
+
+#search-btn {
+  margin: 5px 5px;
+  padding: 2px 5px;
+  width: 100%;
+}
+
+#error-response {
+  color: crimson;
+}
+
+.custom {
+  padding: 5px 5px;
+}
+
+.padstyle {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background: rgb(186, 204, 238);
+}
+
+.current-weather {
+  background-color: rgb(183, 217, 233);
+}
+
+.forecast-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.green {
+  background-color: chartreuse;
+  padding: 5px;
+}
+
+.orange {
+  background-color: coral;
+  padding: 5px;
+}
+
+.red {
+  background-color: firebrick;
+  padding: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .page-main {
     display: flex;
-    flex-direction: row;
-}
+    flex-direction: column;
+  }
 
-.aside{
-    padding-left: 30px;
-    border-right: black solid 3px;
-}
+  .aside {
+    border-right: none;
+    width: 100%;
+  }
 
-#city-input{
-    margin: 5px;
-}
-
-.submit{
-    margin-left: 15px;
-}
-
-ul{
-    list-style: none;
-}
-
-#search-btn{
-    margin: 5px 5px;
-    padding: 2px 5px;
-    width:100%;
-}
-
-#error-response{
-    color: crimson;
-}
-
-.custom{
-    padding:5px 5px;
-}
-
-.padstyle{
-    margin-right: 5px;
-    margin-bottom: 5px;
-    background: rgb(186, 204, 238);
-}
-
-.current-weather{
-    background-color: rgb(183, 217, 233);
-}
-
-.forecast-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.green{
-background-color: chartreuse;
-padding: 5px;
-}
-
-.orange{
-background-color: coral;
-padding: 5px;
-}
-
-.red{
-background-color: firebrick;
-padding: 5px;
-}
-
-@media screen and (max-width: 768px){
-    .page-main{
-        display: flex;
-        flex-direction: column;
-    }
-
-    .aside{
-        border-right:none;
-        width:100%;
-    }
-
-    .col-3{
-        width:80%;
-    }
+  .col-3 {
+    width: 80%;
+  }
 }

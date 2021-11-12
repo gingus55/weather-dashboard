@@ -9,6 +9,7 @@
   text-align: center;
   border: none;
   padding: 50px 10px;
+  font-size: 80px;
 }
 
 .main-container {
@@ -19,6 +20,14 @@
 .aside {
   padding-left: 30px;
   border-right: black solid 3px;
+}
+
+#main-icon {
+  width: 100px;
+}
+
+.weather-icon {
+  width: 70px;
 }
 
 #city-input {
@@ -48,13 +57,13 @@ ul {
 }
 
 .padstyle {
-  margin-right: 5px;
-  margin-bottom: 5px;
+  margin: 10px 10px;
   background: rgb(186, 204, 238);
+  background-image: linear-gradient(rgb(186, 204, 238), white);
 }
 
 .current-weather {
-  background-color: rgb(183, 217, 233);
+  background-image: linear-gradient(rgb(210, 245, 243), white);
 }
 
 .forecast-container {
@@ -91,5 +100,11 @@ ul {
 
   .col-3 {
     width: 80%;
+  }
+  .title {
+    text-align: center;
+    border: none;
+    padding: 50px 10px;
+    font-size: 50px;
   }
 }

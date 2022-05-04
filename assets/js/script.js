@@ -22,7 +22,7 @@ const constructTodaysWeather = function (data) {
 
   return `<div>
     <h2>${data.name} : ${date}
-        <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">
+        <img id="main-icon" src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">
     </h2>
     <ul class="list-group-flush">
         <li class="custom">Temperature: ${data.main.temp} <sup>O</sup>C</li>
@@ -41,10 +41,10 @@ const renderTodaysWeather = function (data) {
 
 const constructForecast = function (dailyArray) {
   dailyArray.forEach((element) => {
-    const date = moment.unix(element.dt).format("DD-MM-YYYY");
+    const date = moment.unix(element.dt).format("dddd-MM-YYYY");
     forecastBlock = `<div class="card col-2 padstyle" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">${date}<img src="http://openweathermap.org/img/wn/${element.weather[0].icon}.png" alt="..."></h5>
+      <h5 class="card-title">${date}<img class="weather-icon" src="http://openweathermap.org/img/wn/${element.weather[0].icon}.png" alt="..."></h5>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Temperature: ${element.temp.day} <sup>O</sup>C</li>
